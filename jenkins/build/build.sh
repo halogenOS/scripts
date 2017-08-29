@@ -36,6 +36,14 @@ start_build() {
   echo
   cd "$PLAYGROUND_DIR"
 
+  # check if repo tool is installed
+  mkdir -p $PLAYGROUND_DIR/bin
+  which repo 2>/dev/null >/dev/null || (
+    curl https://storage.googleapis.com/git-repo-downloads/repo > $PLAYGROUND_DIR/bin/repo && \
+    chmod a+x $PLAYGROUND_DIR/bin/repo
+  )
+  export PATH="$PLAYGROUND_DIR/bin:$PATH"
+
   # cd into the trees dir where we put the rom etc.
   cd trees
 
