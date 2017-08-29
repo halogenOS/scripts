@@ -104,7 +104,7 @@ start_build() {
   else
     # Assume bacon support
     breakfast $Target_device
-    lunch $Target_device
+    lunch ${ROM_ABBREV}_${Target_device}-${Build_type}
     make -j$(($(nproc --all)*4)) bacon
   fi
 
