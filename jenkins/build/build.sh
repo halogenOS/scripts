@@ -1,6 +1,8 @@
 # Build steps. Has commands for all sorts of things
 
-alias reposync_fallback="repo sync --force-sync --no-clone-bundle --no-tags -c -f -j$(nproc --all)"
+reposync_fallback() {
+ repo sync --force-sync --no-clone-bundle --no-tags -c -f -j$(nproc --all) $@
+}
 
 _check_vars() {
   for var in \
