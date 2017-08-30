@@ -31,6 +31,15 @@ _sendmsg() {
 }
 fi
 
+if ! cmd_exists _upload; then
+_upload() {
+  echo "No custom _upload() function defined, skipping upload"
+}
+fi
+
 # The actual build script located in build/
 source build/build.sh
+
+# Initial upload script, will source all the providers
+source upload/upload.sh
 

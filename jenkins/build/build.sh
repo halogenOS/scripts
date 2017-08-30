@@ -187,5 +187,32 @@ start_build() {
     make -j$(($(nproc --all)*4)) $MODULE_TO_BUILD
   fi
 
+  if [ -z "$Module_to_build" ] || [ "$Module_to_build" == "bacon" ] || [ "$Module_to_build" == "otapackage" ]; then
+    FINISHED_BUILD="$ROM_SRC_TOP/out/target/product/$Target_device/${ROM_ABBREV}_${Target_device}_${Rom_version}_$(date +%Y%m%d).zip"
+  else
+    set +e
+    what_to_upload=""
+    case "$Module_to_build" in
+      bootimage) what_to_upload="$ROM_SRC_TOP/out/target/product/${Target_device}/boot.img" ;;
+      bootzip) what_to_upload="$(ls $ROM_SRC_TOP/out/target/product/${Target_device}/*-kernel.zip)" ;;
+      *)
+        dafile=$(find $ROM_SRC_TOP/out/target/product/${Target_device}/system/ -name "${Module_to_build}*" -type f)
+        if [ -z "$dafile" ]; then
+          dafile=$(find $ROM_SRC_TOP/out/target/product/${Target_device}/data/ -name "${Module_to_build}*" -type f)
+        fi
+        if [ -z "$dafile" ] && [[ "$Module_to_build" == *"_32" ]]; then
+          dafile=$(find $ROM_SRC_TOP/out/target/product/${Target_device}/system/ -name "${Module_to_build/_32/}*" -type f)
+        fi
+        if [ -z "$dafile" ]; then
+          dafile=$(find $OM_SRC_TOP/out/target/product/${Target_device}/root/ -name "${Module_to_build}*" -type f)
+        fi
+        what_to_upload="$dafile"
+     ;;
+    esac
+    set -e
+    FINISHED_BUILD="$what_to_upload"
+  fi
+  _upload
+
   return 0
 }
