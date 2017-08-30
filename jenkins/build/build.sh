@@ -152,10 +152,11 @@ start_build() {
     build \
         $([ -z "$Module_to_build" ] && echo "full" || echo "module") \
         ${ROM_ABBREV}_${Target_device}-${Build_type} \
-        $(${Do_clean} && echo "noclean") $Module_to_build || (
-      _sendmsg "Build [$BUILD_DISPLAY_NAME]($BUILD_URL) failed."; \
-      ret=1
-    )
+        $(${Do_clean} && echo "noclean") $Module_to_build
+    ret=$?
+    if [ $ret -ne 0 ]; then
+      _sendmsg "Build [$BUILD_DISPLAY_NAME]($BUILD_URL) failed."
+    fi
     set -e
     if [ $ret -ne 0 ]; then
       return $ret
