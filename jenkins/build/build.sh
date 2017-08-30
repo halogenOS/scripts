@@ -10,7 +10,8 @@ _check_vars() {
       ROM_VERSION SUPPORTS_XOSTOOLS ROM_VENDOR_DIR      \
       ROM_MANIFEST_REPO ROM_ABBREV_BR                   \
                                                         \
-      Target_device Do_clean Build_type Enable_ccache
+      Target_device Do_clean Build_type Enable_ccache   \
+      Only_upload
   do
     if [ -z "${!var}" ]; then
       echo "Variable '$var' not defined or empty!"
@@ -45,6 +46,11 @@ start_build() {
   echo "Java options: $_JAVA_OPTIONS"
   echo
   cd "$PLAYGROUND_DIR"
+
+  if $Only_upload; then
+    upload_cake
+    return 0
+  fi
 
   if $Enable_ccache; then
     CCACHE_SIZE=${CCACHE_SIZE:=80G}
@@ -187,6 +193,12 @@ start_build() {
     make -j$(($(nproc --all)*4)) $MODULE_TO_BUILD
   fi
 
+  upload_cake
+
+  return 0
+}
+
+upload_cake() {
   if [ -z "$Module_to_build" ] || [ "$Module_to_build" == "bacon" ] || [ "$Module_to_build" == "otapackage" ]; then
     FINISHED_BUILD="$ROM_SRC_TOP/out/target/product/$Target_device/${ROM_ABBREV}_${Target_device}_${Rom_version}_$(date +%Y%m%d).zip"
   else
@@ -207,12 +219,10 @@ start_build() {
           dafile=$(find $OM_SRC_TOP/out/target/product/${Target_device}/root/ -name "${Module_to_build}*" -type f)
         fi
         what_to_upload="$dafile"
-     ;;
+      ;;
     esac
     set -e
     FINISHED_BUILD="$what_to_upload"
   fi
   _upload
-
-  return 0
 }
