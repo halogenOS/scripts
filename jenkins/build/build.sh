@@ -86,11 +86,20 @@ start_build() {
     fi # Vendor dir does not exist
     # Setup env so that we get xostools
     source build/envsetup.sh
+    REPOSYNC_SPEED=$Reposync_speed
     if ! $HAVE_REPO_SRC; then
-      reposync
+      if [ "$Reposync_speed" == "default" ] || [ "$Reposync_speed" == "auto" ]; then
+        REPOSYNC_SPEED=
+      fi
     else
-      reposync fast
+      REPOSYNC_SPEED=$Reposync_speed
+      if [ "$Reposync_speed" == "default" ]; then
+        REPOSYNC_SPEED=fast
+      elif [ "$Reposync_speed" == "auto" ]; then
+        REPOSYNC_SPEED=
+      fi
     fi
+    reposync $REPOSYNC_SPEED
   else
     # Traditional, but faster
     reposync_fallback
