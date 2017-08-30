@@ -98,6 +98,7 @@ start_build() {
   fi # SUPPORTS_XOSTOOLS
 
   # Sync is done. We already did envsetup.
+  _sendmsg "Build for $Target_device started"
   if $SUPPORTS_XOSTOOLS; then
     # Start the build
     build full ${ROM_ABBREV}_${Target_device}-${Build_type} $(${Do_clean} && echo "noclean")
