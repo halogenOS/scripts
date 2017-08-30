@@ -35,6 +35,14 @@ start_build() {
   echo "ROM abbreviation: $ROM_ABBREV"
   echo "ROM abbreviation for branching: $ROM_ABBREV_BR"
   echo "ROM vendor directory: $ROM_VENDOR_DIR"
+  echo "Target device: $Target_device"
+  echo "Clean: $Do_clean"
+  echo "Build type: $Build_type"
+  echo "Repopick stuff: $repopick_before_build"
+  echo "Sync: $do_sync"
+  echo "Reset: $do_reset"
+  echo "CCache: $Enable_ccache, dir: $CCACHE_DIR"
+  echo "Java options: $_JAVA_OPTIONS"
   echo
   cd "$PLAYGROUND_DIR"
 
