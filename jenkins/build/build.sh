@@ -99,10 +99,28 @@ start_build() {
         REPOSYNC_SPEED=
       fi
     fi
-    reposync $REPOSYNC_SPEED
+    if [ "$Do_resync" == "true" ]; then
+      reporesync full confident
+    else
+      if [ "$do_reset" != "false" ]; then
+        set +e
+        resetmanifest
+        reposterilize
+        set -e
+      fi
+      if [ "$do_sync" != "false" ]; then
+        # To make sure that there are no changes
+        # in the hardware repos, remove them and
+        # let reposync sync add them back properly
+        rm -rf hardware/
+        reposync $REPOSYNC_SPEED
+      fi
+    fi
   else
-    # Traditional, but faster
-    reposync_fallback
+    if [ "$do_sync" != "false" }; then
+      # Traditional, but faster
+      reposync_fallback
+    fi
   fi # SUPPORTS_XOSTOOLS
   source build/envsetup.sh
 
