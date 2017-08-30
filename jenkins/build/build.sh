@@ -98,15 +98,24 @@ start_build() {
   fi # SUPPORTS_XOSTOOLS
 
   # Sync is done. We already did envsetup.
-  _sendmsg "Build for $Target_device started"
+  if [ -z "$Module_to_build" ]; then
+    _sendmsg "Build for $Target_device started"
+  else
+    _sendmsg "Build of module $Module_to_build for $Target_device started"
+  fi
   if $SUPPORTS_XOSTOOLS; then
     # Start the build
-    build full ${ROM_ABBREV}_${Target_device}-${Build_type} $(${Do_clean} && echo "noclean")
+    build \
+        ([ -z "$Module_to_build" ] && echo "full" || echo "full") \
+        ${ROM_ABBREV}_${Target_device}-${Build_type} \
+        $(${Do_clean} && echo "noclean") $Module_to_build
   else
+    [ -z "$Module_to_build" ] && MODULE_TO_BUILD="$Module_to_build" || \
+                                 MODULE_TO_BUILD="bacon"
     # Assume bacon support
     breakfast $Target_device
     lunch ${ROM_ABBREV}_${Target_device}-${Build_type}
-    make -j$(($(nproc --all)*4)) bacon
+    make -j$(($(nproc --all)*4)) $MODULE_TO_BUILD
   fi
 
   return 0
