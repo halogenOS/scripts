@@ -26,7 +26,9 @@ source project.sh
 # prevent collisions with other things.
 
 if ! cmd_exists _sendmsg; then
-alias _sendmsg="echo"
+_sendmsg() {
+  echo $@
+}
 fi
 
 # The actual build script located in build/
