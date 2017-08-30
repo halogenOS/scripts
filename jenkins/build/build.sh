@@ -115,7 +115,7 @@ start_build() {
   if $SUPPORTS_XOSTOOLS; then
     # Start the build
     build \
-        ([ -z "$Module_to_build" ] && echo "full" || echo "module") \
+        $([ -z "$Module_to_build" ] && echo "full" || echo "module") \
         ${ROM_ABBREV}_${Target_device}-${Build_type} \
         $(${Do_clean} && echo "noclean") $Module_to_build
   else
