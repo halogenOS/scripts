@@ -2,7 +2,7 @@
 
 _check_vars_uplprov_sourceforge() {
   for var in \
-      SOURCEFORGE_PROJECT SOURCEFORGE_USER JENKINS_HOME \
+      SOURCEFORGE_PROJECT SOURCEFORGE_USER JENKINS_HOME
   do
     if [ -z "${!var}" ]; then
       echo "Variable '$var' not defined or empty!"

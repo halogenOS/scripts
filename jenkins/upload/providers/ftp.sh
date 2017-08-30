@@ -2,7 +2,7 @@
 
 _check_vars_uplprov_ftp() {
   for var in \
-        FTP_HOST FTP_USER FTP_PASSWD_FILE FTP_PATH \
+        FTP_HOST FTP_USER FTP_PASSWD_FILE FTP_PATH
   do
     if [ -z "${!var}" ]; then
       echo "Variable '$var' not defined or empty!"
