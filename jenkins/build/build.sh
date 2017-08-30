@@ -10,7 +10,7 @@ _check_vars() {
       ROM_VERSION SUPPORTS_XOSTOOLS ROM_VENDOR_DIR      \
       ROM_MANIFEST_REPO ROM_ABBREV_BR                   \
                                                         \
-      Target_device Do_clean Build_type
+      Target_device Do_clean Build_type Enable_ccache
   do
     if [ -z "${!var}" ]; then
       echo "Variable '$var' not defined or empty!"
@@ -45,6 +45,15 @@ start_build() {
   echo "Java options: $_JAVA_OPTIONS"
   echo
   cd "$PLAYGROUND_DIR"
+
+  if $Enable_ccache; then
+    CCACHE_SIZE=${CCACHE_SIZE:=80G}
+
+    if [ ! -e "$CCACHE_DIR" ]; then
+      mkdir -p "$CCACHE_DIR"
+      ccache -M $CCACHE_SIZE
+    fi
+  fi
 
   # check if repo tool is installed
   mkdir -p $PLAYGROUND_DIR/bin
