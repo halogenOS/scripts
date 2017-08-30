@@ -103,8 +103,23 @@ start_build() {
   else
     # Traditional, but faster
     reposync_fallback
-    source build/envsetup.sh
   fi # SUPPORTS_XOSTOOLS
+  source build/envsetup.sh
+
+  if [ ! -z "$repopick_before_build" ]; then
+    IFS='
+'
+    for piki in $(echo "$repopick_before_build" | sed -e 's/\[\[NEWLINE\]\]/\n/g'); do
+      unset IFS
+      repopick $piki
+      IFS='
+'
+    done
+    unset IFS
+  fi
+
+  # One more time just to be on the safe side
+  source build/envsetup.sh
 
   # Sync is done. We already did envsetup.
   if [ -z "$Module_to_build" ]; then
