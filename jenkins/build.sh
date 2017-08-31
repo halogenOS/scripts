@@ -37,6 +37,13 @@ _upload() {
 }
 fi
 
+if ! cmd_exists _get_download_url; then
+echo "Warning: Download URL function not defined. It's necessary for posting notifications with links!"
+_get_download_url() {
+  echo "about:blank"
+}
+fi
+
 # The actual build script located in build/
 source build/build.sh
 

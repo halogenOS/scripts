@@ -225,4 +225,11 @@ upload_cake() {
     FINISHED_BUILD="$what_to_upload"
   fi
   _upload
+  _sendmsg "New build - ${ROM_ABBREV} ${ROM_VERSION} - ${Target_device} - $(date +%Y/%m/%d)
+
+*Changelog*:
+${Build_changelog}
+
+[Download here]($(_get_download_url))"
+
 }
