@@ -22,6 +22,6 @@ _do_upload() {
   FILE_SIZE_IN_MiB=$(echo "scale=2;$FILE_SIZE_IN_BYTES/1024/1024" | bc)
   _sendmsg "The $WHAT_IS_UPLOADING for $Target_device is uploading ($1)
 File size: $FILE_SIZE_IN_MiB MiB
-Estimated upload duration: $(($FILE_SIZE_IN_BYTES / 1024 / $KBPS_SPEED / 60)) minutes"
+Estimated upload duration: $(($FILE_SIZE_IN_BYTES / (1024/8) / $KBPS_SPEED / 60)) minutes"
   upload_$1 $2
 }

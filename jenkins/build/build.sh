@@ -47,11 +47,6 @@ start_build() {
   echo
   cd "$PLAYGROUND_DIR"
 
-  if $Only_upload; then
-    upload_cake
-    return 0
-  fi
-
   if $Enable_ccache; then
     CCACHE_SIZE=${CCACHE_SIZE:=80G}
 
@@ -74,11 +69,16 @@ start_build() {
 
   # create a dir for the current version if
   # it does not exist and cd into it
-  ROM_SRC_TOP="$ROM_NAME/$ROM_VERSION"
+  ROM_SRC_TOP="$(realpath $ROM_NAME/$ROM_VERSION)"
   mkdir -p $ROM_SRC_TOP
   cd $ROM_SRC_TOP
 
   echo "ROM source directory $ROM_SRC_TOP"
+
+  if $Only_upload; then
+    upload_cake
+    return 0
+  fi
 
   # check if we already have sources
   [ -d ".repo" ] && HAVE_REPO_SRC=true || HAVE_REPO_SRC=false
@@ -199,6 +199,7 @@ start_build() {
 }
 
 upload_cake() {
+  echo "Upload started"
   if [ -z "$Module_to_build" ] || [ "$Module_to_build" == "bacon" ] || [ "$Module_to_build" == "otapackage" ]; then
     FINISHED_BUILD="$ROM_SRC_TOP/out/target/product/$Target_device/${ROM_ABBREV}_${Target_device}_${Rom_version}_$(date +%Y%m%d).zip"
   else
