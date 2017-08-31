@@ -18,7 +18,7 @@ _do_upload() {
   if [ ! -z "$Module_to_build" ]; then
     WHAT_IS_UPLOADING="module $Module_to_build"
   fi
-  FILE_SIZE_IN_BYTES=$(stat --printf="%s" $2)
+  FILE_SIZE_IN_BYTES=$(stat --printf="%s" $(readlink -f $2))
   FILE_SIZE_IN_MiB=$(echo "scale=2;$FILE_SIZE_IN_BYTES/1024/1024" | bc)
   _sendmsg "The $WHAT_IS_UPLOADING for $Target_device is uploading ($1)
 File size: $FILE_SIZE_IN_MiB MiB
