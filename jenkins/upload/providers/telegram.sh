@@ -16,5 +16,5 @@ _check_vars_uplprov_telegram() {
 upload_telegram() {
   echo "Uploading to Telegram..."
   _check_vars_uplprov_telegram
-  curl -F chat_id="$($TELEGRAM_CHAT_ID_SCRIPT)" -F document="@$1" "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument"
+  curl -F chat_id="$($TELEGRAM_CHAT_ID_SCRIPT)" -F document="@$1" "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" 2>/dev/null >/dev/null
 }
