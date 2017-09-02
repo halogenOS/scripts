@@ -241,11 +241,17 @@ upload_cake() {
     FINISHED_BUILD="$what_to_upload"
   fi
   _upload
-  _sendmsg "New build - ${ROM_ABBREV} ${ROM_VERSION} - ${Target_device} - $(date +%Y/%m/%d)
+  type_of_="build"
+  dl_if_applicable="[Download here]($(_get_download_url))"
+  if [ ! -z "$Module_to_build" ]; then
+    type_of_="module $Module_to_build"
+    dl_if_applicable=""
+  fi
+  _sendmsg "New $type_of_ - ${ROM_ABBREV} ${ROM_VERSION} - ${Target_device} - $(date +%Y/%m/%d)
 
 *Changelog*:
 ${Build_changelog}
 
-[Download here]($(_get_download_url))"
+$dl_if_applicable"
 
 }

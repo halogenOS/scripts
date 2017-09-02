@@ -6,6 +6,7 @@ UPLOAD_PRV_DIR="$UPLOAD_SH_DIR/providers"
 
 source $UPLOAD_PRV_DIR/sourceforge.sh
 source $UPLOAD_PRV_DIR/ftp.sh
+source $UPLOAD_PRV_DIR/telegram.sh
 
 # $1: provider
 # $2: file
