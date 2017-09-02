@@ -159,8 +159,9 @@ start_build() {
       if [[ "$piki" == "local "* ]]; then
         pikidir=$(echo "$piki" | cut -d ' ' -f1)
         pikirev=$(echo "$piki" | cut -d ' ' -f2)
+        pikicmt=$(echo "$piki" | cut -d ' ' -f3)
         git fetch $pikidir $pikirev
-        git cherry-pick FETCH_HEAD
+        git cherry-pick $pikicmt
       else
         repopick $piki
       fi
