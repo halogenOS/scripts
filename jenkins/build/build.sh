@@ -156,7 +156,14 @@ start_build() {
 '
     for piki in $(echo "$repopick_before_build" | sed -e 's/\[\[NEWLINE\]\]/\n/g'); do
       unset IFS
-      repopick $piki
+      if [[ "$piki" == "local "* ]]; then
+        pikidir=$(echo "$piki" | cut -d ' ' -f1)
+        pikirev=$(echo "$piki" | cut -d ' ' -f2)
+        git fetch $pikidir $pikirev
+        git cherry-pick FETCH_HEAD
+      else
+        repopick $piki
+      fi
       IFS='
 '
     done
