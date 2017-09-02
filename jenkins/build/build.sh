@@ -157,9 +157,9 @@ start_build() {
     for piki in $(echo "$repopick_before_build" | sed -e 's/\[\[NEWLINE\]\]/\n/g'); do
       unset IFS
       if [[ "$piki" == "local "* ]]; then
-        pikidir=$(echo "$piki" | cut -d ' ' -f1)
-        pikirev=$(echo "$piki" | cut -d ' ' -f2)
-        pikicmt=$(echo "$piki" | cut -d ' ' -f3)
+        pikidir=$(echo "$piki" | cut -d ' ' -f2)
+        pikirev=$(echo "$piki" | cut -d ' ' -f3)
+        pikicmt=$(echo "$piki" | cut -d ' ' -f4)
         git fetch $pikidir $pikirev
         git cherry-pick $pikicmt
       else
