@@ -149,7 +149,7 @@ start_build() {
   fi # SUPPORTS_XOSTOOLS
   source build/envsetup.sh
 
-  breakfast ${Target_device}
+  breakfast ${Target_device} || :
 
   if [ ! -z "$repopick_before_build" ]; then
     IFS='
