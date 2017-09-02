@@ -158,10 +158,13 @@ start_build() {
       unset IFS
       if [[ "$piki" == "local "* ]]; then
         pikidir=$(echo "$piki" | cut -d ' ' -f2)
-        pikirev=$(echo "$piki" | cut -d ' ' -f3)
-        pikicmt=$(echo "$piki" | cut -d ' ' -f4)
+        pikidst=$(echo "$piki" | cut -d ' ' -f3)
+        pikirev=$(echo "$piki" | cut -d ' ' -f4)
+        pikicmt=$(echo "$piki" | cut -d ' ' -f5)
+        cd $ROM_SRC_TOP/$pikidst
         git fetch $pikidir $pikirev
         git cherry-pick $pikicmt
+        cd $ROM_SRC_TOP
       else
         repopick $piki
       fi
