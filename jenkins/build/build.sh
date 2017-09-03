@@ -173,6 +173,17 @@ start_build() {
         git fetch $pikidir
         git reset --hard $pikirev
         cd $ROM_SRC_TOP
+      elif [[ "$piki" == "remote-reset "* ]]; then
+        pikidir=$(echo "$piki" | cut -d ' ' -f2)
+        pikidst=$(echo "$piki" | cut -d ' ' -f3)
+        pikirev=$(echo "$piki" | cut -d ' ' -f4)
+        cd $ROM_SRC_TOP/$pikidst
+        rid=$(echo "$pikidir" | sha256sum | cut -d ' ' -f1)
+        echo "remote-reset: Generated $rid"
+        git remote add $rid $pikidir
+        git fetch $rid
+        git reset --hard $pikirev
+        cd $ROM_SRC_TOP
       else
         repopick $piki
       fi
