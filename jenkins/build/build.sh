@@ -180,7 +180,7 @@ start_build() {
         cd $ROM_SRC_TOP/$pikidst
         rid=$(echo "$pikidir" | sha256sum | cut -d ' ' -f1)
         echo "remote-reset: Generated $rid"
-        git remote add $rid $pikidir
+        git remote add $rid $pikidir || :
         git fetch $rid
         git reset --hard $pikirev
         cd $ROM_SRC_TOP
