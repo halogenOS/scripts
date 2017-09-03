@@ -235,11 +235,11 @@ start_build() {
 upload_cake() {
   echo "Upload started"
   if [ -z "$Module_to_build" ] || [ "$Module_to_build" == "bacon" ] || [ "$Module_to_build" == "otapackage" ]; then
-    FINISHED_BUILD="$ROM_SRC_TOP/out/target/product/$Target_device/${ROM_ABBREV}_${Target_device}_${Rom_version}_$(date +%Y%m%d)"
+    FINISHED_BUILD="$ROM_SRC_TOP/out/target/product/$Target_device/${ROM_ABBREV}_${Target_device}_*_$(date +%Y%m%d)"
     if [ ! -z "${Zip_suffix}" ]; then
       ln -sf "$FINISHED_BUILD.zip" "${FINISHED_BUILD}${Zip_suffix}.zip"
     fi
-    FINISHED_BUILD="${FINISHED_BUILD}${Zip_suffix}.zip"
+    FINISHED_BUILD="$(ls ${FINISHED_BUILD}${Zip_suffix}.zip)"
   else
     set +e
     what_to_upload=""
