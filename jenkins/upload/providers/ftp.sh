@@ -19,9 +19,10 @@ upload_ftp() {
   HOST="$FTP_HOST"
   USER="$FTP_USER"
   PASSWD="$(cat $FTP_PASSWD_FILE)"
-  FILE="$1"
+  FULL_FILE="$1"
+  FILE="$(basename $FULL_FILE)"
 
-  cd $(dirname $(realpath "$FILE"))
+  cd $(dirname $(realpath "$FULL_FILE"))
 
   ftp-ssl -n -v -p $HOST << EOT
 user $USER $PASSWD
@@ -35,4 +36,5 @@ EOT
   unset USER
   unset PASSWD
   unset FILE
+  unset FULL_FILE
 }
