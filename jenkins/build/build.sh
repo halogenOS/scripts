@@ -182,7 +182,7 @@ start_build() {
         echo "remote-reset: Generated $rid"
         git remote add $rid $pikidir || :
         git fetch $rid
-        git reset --hard $pikirev
+        git reset --hard $rid/$pikirev
         cd $ROM_SRC_TOP
       else
         repopick $piki
