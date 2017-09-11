@@ -269,6 +269,10 @@ upload_cake() {
     set -e
     FINISHED_BUILD="$what_to_upload"
   fi
+  upload_cake_topping
+}
+
+upload_cake_topping() {
   _upload
   type_of_="build"
   dl_if_applicable="[Download here]($(_get_download_url))"
