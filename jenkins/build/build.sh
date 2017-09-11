@@ -45,6 +45,9 @@ start_build() {
   echo "CCache: $Enable_ccache, dir: $CCACHE_DIR"
   echo "Java options: $_JAVA_OPTIONS"
   echo
+
+  BUILD_START_DATE="$(date +%Y%m%d)"
+
   cd "$PLAYGROUND_DIR"
 
   if $Enable_ccache; then
@@ -240,7 +243,7 @@ start_build() {
 upload_cake() {
   echo "Upload started"
   if [ -z "$Module_to_build" ] || [ "$Module_to_build" == "bacon" ] || [ "$Module_to_build" == "otapackage" ]; then
-    FINISHED_BUILD="$(ls $ROM_SRC_TOP/out/target/product/$Target_device/${ROM_ABBREV}_${Target_device}_*_$(date +%Y%m%d).zip)"
+    FINISHED_BUILD="$(ls $ROM_SRC_TOP/out/target/product/$Target_device/${ROM_ABBREV}_${Target_device}_*_$BUILD_START_DATE.zip)"
     if [ ! -z "${Zip_suffix}" ]; then
       BEFORE_FINISHED_BUILD="$FINISHED_BUILD"
       FINISHED_BUILD="${FINISHED_BUILD/.zip/${Zip_suffix}.zip}"
