@@ -276,6 +276,9 @@ upload_cake() {
 
 upload_cake_topping() {
   _upload
+  if [ "$USES_ASYNC_HANDLER" == "true" ]; then
+    return 0
+  fi
   type_of_="build"
   dl_if_applicable="[Download here]($(_get_download_url))"
   if [ ! -z "$Module_to_build" ]; then
