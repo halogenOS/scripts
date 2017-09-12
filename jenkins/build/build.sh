@@ -21,6 +21,8 @@ _check_vars() {
   return 0
 }
 
+BUILD_START_DATE="$(date +%Y%m%d)"
+
 start_build() {
   # Just to make sure
   set -e
@@ -45,9 +47,6 @@ start_build() {
   echo "CCache: $Enable_ccache, dir: $CCACHE_DIR"
   echo "Java options: $_JAVA_OPTIONS"
   echo
-
-  BUILD_START_DATE="$(date +%Y%m%d)"
-
   cd "$PLAYGROUND_DIR"
 
   if $Enable_ccache; then
