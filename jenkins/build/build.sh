@@ -281,7 +281,7 @@ upload_cake_topping() {
   fi
   type_of_="build"
   dl_if_applicable="[Download here]($(_get_download_url))"
-  if [ ! -z "$Module_to_build" ]; then
+  if [ ! -z "$Module_to_build" ] && [ "$Force_dl_link" != "true" ]; then
     type_of_="module $Module_to_build"
     dl_if_applicable=""
   fi
