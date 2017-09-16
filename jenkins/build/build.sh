@@ -191,6 +191,12 @@ start_build() {
           git reset --hard $rid/$pikirev
         fi
         cd $ROM_SRC_TOP
+      elif [[ "$piki" == "sync" ]]; then
+        if $SUPPORTS_XOSTOOLS; do
+          reposync $REPOSYNC_SPEED
+        else
+          reposync_fallback
+        then
       else
         repopick $piki
       fi
