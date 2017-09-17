@@ -156,7 +156,7 @@ start_build() {
   if [ ! -z "$repopick_before_build" ]; then
     IFS='
 '
-    for piki in $(echo "$repopick_before_build" | sed -e 's/\[\[NEWLINE\]\]/\n/g'); do
+    for piki in $(echo "$repopick_before_build" | sed -e 's/\[\[NEWLINE\]\]/\n/g' | sed -e 's/\[\[SPACE\]\]/ /g'); do
       unset IFS
       if [[ "$piki" == "local "* ]]; then
         pikidir=$(echo "$piki" | cut -d ' ' -f2)
