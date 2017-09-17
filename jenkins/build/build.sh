@@ -192,11 +192,11 @@ start_build() {
         fi
         cd $ROM_SRC_TOP
       elif [[ "$piki" == "sync" ]]; then
-        if $SUPPORTS_XOSTOOLS; do
+        if $SUPPORTS_XOSTOOLS; then
           reposync $REPOSYNC_SPEED
         else
           reposync_fallback
-        then
+        fi
       else
         repopick $piki
       fi
