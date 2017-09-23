@@ -27,7 +27,7 @@ FTP_HOST='acc.yourhost.com'
 FTP_USER='sampleuser'
 FTP_PASSWD_FILE="$JENKINS_HOME/your-secured-passwd.txt"
 
-# Average download speed in kbit/s
+# Average upload speed in kbit/s
 KBPS_SPEED=3500
 
 TELEGRAM_BOT_TOKEN="your api token"
