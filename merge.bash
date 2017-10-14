@@ -8,6 +8,7 @@ while getopts “opu:” OPTION
 do
      case $OPTION in
          o)
+             PUSH=true
              ONLY_PUSH=true
              ;;
          p)
