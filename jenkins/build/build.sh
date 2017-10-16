@@ -198,7 +198,13 @@ start_build() {
           reposync_fallback
         fi
       else
+        set +e
         repopick $piki
+        if [ $? -ne 0 ]; then
+          _sendmsg "Repopick failed"
+          return 1
+        fi
+        set -e
       fi
       IFS='
 '
