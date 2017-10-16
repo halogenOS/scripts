@@ -202,6 +202,7 @@ start_build() {
         repopick $piki
         if [ $? -ne 0 ]; then
           _sendmsg "Repopick failed"
+          set -e
           return 1
         fi
         set -e
