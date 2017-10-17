@@ -2,7 +2,7 @@ source=$(pwd)
 tag=android-8.0.0_r17
 xos_ver=XOS-8.0
 prefix=https://android.googlesource.com/platform/
-gerrit_url="ssh://%s@review.halogenos.org:29418/android_"
+gerrit_url="ssh://%s@review.halogenos.org:29418/android_%s"
 
 while getopts “opu:” OPTION
 do
@@ -39,7 +39,7 @@ for project in $(cat merges.txt); do
     fi
     if [[ $PUSH && ! -z $GERRIT_USER ]]; then
       git remote remove gerrit 2>/dev/null
-      git remote add gerrit $(printf $gerrit_url "$GERRIT_USER")$(echo $path | sed 's/\//_/g')
+      git remote add gerrit $(printf $gerrit_url "$GERRIT_USER" $(echo $path | sed 's/\//_/g') )
       git push gerrit HEAD:refs/heads/$xos_ver
     fi
     cd $source
