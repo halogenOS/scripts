@@ -199,9 +199,10 @@ start_build() {
         fi
       else
         set +e
-        repopick $piki
+        fpiki=${piki//,/ }
+        repopick $fpiki
         if [ $? -ne 0 ]; then
-          _sendmsg "Repopick failed"
+          _sendmsg "Repopick failed for $BUILD_TAG"
           set -e
           return 1
         fi
