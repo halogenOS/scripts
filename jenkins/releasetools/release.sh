@@ -14,6 +14,6 @@ do_release() {
   if [[ "$(git remote)" != *"gerrit"* ]]; then
     git remote add gerrit ssh://$GERRIT_USER@$GERRIT_REMOTE/$EXTRAS_OTA_REPO
   fi
-  git push gerrit HEAD:refs/for/$ROM_VERSION
+  git push gerrit HEAD:refs/for/${ROM_ABBREV_BR}${ROM_VERSION}
   echo "Done."
 }
