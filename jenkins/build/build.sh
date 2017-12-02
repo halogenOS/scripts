@@ -26,9 +26,12 @@ BUILD_START_DATE="$(date +%Y%m%d)"
 start_build() {
   # Just to make sure
   set -e
+  # For releasing builds
+  source $PLAYGROUND_DIR/releasetools/release.sh
   # Let's go
   echo "Build launched"
   _check_vars
+  [ -z "$Do_release" ] && DO_RELEASE=false || DO_RELEASE=$Do_release
   echo "Workspace: $WORKSPACE_DIR"
   echo "Playground: $PLAYGROUND_DIR"
   echo "ROM name: $ROM_NAME"
@@ -301,6 +304,11 @@ upload_cake_topping() {
   if [ ! -z "$Module_to_build" ] && [ "$Force_dl_link" != "true" ]; then
     dl_if_applicable=""
   fi
+
+  if $DO_RELEASE; then
+    do_release
+  fi
+
   _sendmsg "New $type_of_ - ${ROM_ABBREV} ${ROM_VERSION} - ${Target_device} - $(date +%Y/%m/%d)
 
 *Changelog*:
