@@ -26,8 +26,6 @@ BUILD_START_DATE="$(date +%Y%m%d)"
 start_build() {
   # Just to make sure
   set -e
-  # For releasing builds
-  source $PLAYGROUND_DIR/releasetools/release.sh
   # Let's go
   echo "Build launched"
   _check_vars
@@ -306,6 +304,8 @@ upload_cake_topping() {
   fi
 
   if $DO_RELEASE; then
+    # For releasing builds
+    source $PLAYGROUND_DIR/releasetools/release.sh
     do_release
   fi
 
