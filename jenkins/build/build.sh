@@ -198,6 +198,13 @@ start_build() {
         else
           reposync_fallback
         fi
+      elif [[ "$piki" == "reset-here "* ]]; then
+        pikidir=$(echo "$piki" | cut -d ' ' -f2)
+        pikirev=$(echo "$piki" | cut -d ' ' -f3)
+        cd $ROM_SRC_TOP/$pikidir
+        git fetch $(echo "$pikirev" | cut -d '/' -f1)
+        git reset --hard $pikirev
+        cd $ROM_SRC_TOP
       else
         set +e
         fpiki=${piki//,/ }
