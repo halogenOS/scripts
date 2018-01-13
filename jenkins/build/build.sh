@@ -214,8 +214,8 @@ start_build() {
         git clone $pikirem $pikidir -b $pikirev
       elif [[ "$piki" == "fetch-file "* ]]; then
         pikifile=$(echo "$piki" | cut -d ' ' -f2)
-        pikidest=$(echo "$piki" | cut -d ' ' -f3)
-        curl https://github.com/$pikifile > $pikidest
+        pikidest=$(echo "$piki" | cut -d ' ' -f3 | sed -e 's/[.][.]/dotdot/g')
+        curl https://raw.githubusercontent.com/$pikifile > $pikidest
       else
         set +e
         fpiki=${piki//,/ }
