@@ -212,6 +212,10 @@ start_build() {
         pikidir=$(echo "$piki" | cut -d ' ' -f3)
         pikirev=$(echo "$piki" | cut -d ' ' -f4)
         git clone $pikirem $pikidir -b $pikirev
+      elif [[ "$piki" == "fetch-file "* ]]; then
+        pikifile=$(echo "$piki" | cut -d ' ' -f2)
+        pikidest=$(echo "$piki" | cut -d ' ' -f3)
+        curl https://github.com/$pikifile > $pikidest
       else
         set +e
         fpiki=${piki//,/ }
