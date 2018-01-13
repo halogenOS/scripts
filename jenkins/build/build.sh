@@ -216,6 +216,13 @@ start_build() {
         pikifile=$(echo "$piki" | cut -d ' ' -f2)
         pikidest=$(echo "$piki" | cut -d ' ' -f3 | sed -e 's/[.][.]/dotdot/g')
         curl https://raw.githubusercontent.com/$pikifile > $pikidest
+        if [[ "$pikidest" == ".repo/"* ]]; then
+          if $SUPPORTS_XOSTOOLS; then
+            reposync $REPOSYNC_SPEED
+          else
+            reposync_fallback
+          fi
+        fi
       else
         set +e
         fpiki=${piki//,/ }
