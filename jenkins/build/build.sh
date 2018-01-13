@@ -205,6 +205,11 @@ start_build() {
         git fetch $(echo "$pikirev" | cut -d '/' -f1)
         git reset --hard $pikirev
         cd $ROM_SRC_TOP
+      elif [[ "$piki" == "clone "* ]]; then
+        pikirem=$(echo "$piki" | cut -d ' ' -f2)
+        pikidir=$(echo "$piki" | cut -d ' ' -f3)
+        pikirev=$(echo "$piki" | cut -d ' ' -f4)
+        git clone $pikirem $pikidir -b $pikirev
       else
         set +e
         fpiki=${piki//,/ }
