@@ -16,5 +16,8 @@ _check_vars_uplprov_sourceforge() {
 upload_sourceforge() {
   echo "Uploading to sourceforge..."
   _check_vars_uplprov_sourceforge
-  scp -o StrictHostKeyChecking=no -i $JENKINS_HOME/.ssh/id_rsa "$1" $SOURCEFORGE_USER@frs.sourceforge.net:/home/frs/project/$SOURCEFORGE_PROJECT/$SOURCEFORGE_PATH
+  if ! scp -o StrictHostKeyChecking=no -i $JENKINS_HOME/.ssh/id_rsa "$1" $SOURCEFORGE_USER@frs.sourceforge.net:/home/frs/project/$SOURCEFORGE_PROJECT/$SOURCEFORGE_PATH; then
+    _sendmsg "Upload to sourceforge failed, trying again."
+    upload_sourceforge "$1"
+  fi
 }
