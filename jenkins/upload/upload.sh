@@ -15,6 +15,9 @@ _do_upload() {
     echo "KBPS_SPEED not defined!"
     return 1
   fi
+  if [ "$SKIP_UPLOAD" == "yes" ]; then
+    return 0
+  fi
   WHAT_IS_UPLOADING="build"
   if [ ! -z "$Module_to_build" ]; then
     WHAT_IS_UPLOADING="module $Module_to_build"
