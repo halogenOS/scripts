@@ -11,6 +11,7 @@ external/wpa_supplicant_8
 frameworks/av
 frameworks/base
 frameworks/native
+frameworks/opt/net/wifi
 frameworks/opt/telephony
 hardware/interfaces
 hardware/libhardware
