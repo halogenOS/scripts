@@ -39,7 +39,7 @@ start_build() {
   echo "ROM abbreviation: $ROM_ABBREV"
   echo "ROM abbreviation for branching: $ROM_ABBREV_BR"
   echo "ROM vendor directory: $ROM_VENDOR_DIR"
-  echo "ROM extras directory: $ROM_EXTRAS_DIR"
+  echo "ROM-specific external directory: $ROM_EXTERNAL_DIR"
   echo "Target device: $Target_device"
   echo "Clean: $Do_clean"
   echo "Build type: $Build_type"
@@ -103,8 +103,8 @@ start_build() {
           reposync_fallback build/soong
           reposync_fallback build/kati
           reposync_fallback $ROM_VENDOR_DIR
-          if [ ! -z "$ROM_EXTRAS_DIR" ]; then
-            reposync_fallback $ROM_EXTRAS_DIR
+          if [ ! -z "$ROM_EXTERNAL_DIR" ]; then
+            reposync_fallback $ROM_EXTERNAL_DIR
           fi
         fi
       else
