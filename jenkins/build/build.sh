@@ -94,7 +94,7 @@ start_build() {
 
   # if we have xostools, use that. If not, fallback to traditional
   if $SUPPORTS_XOSTOOLS; then
-    if ! [ -d "$ROM_VENDOR_DIR" ]; then
+    if [ ! -d "$ROM_VENDOR_DIR" ] || [ ! -d "$ROM_EXTERNAL_DIR" ]; then
       # We only support 7.1+
       if [ "$ROM_VERSION" != "7.1" ]; then
         if ! [ -d "build/make" -a -d "build/soong" -a -d "build/kati" ]; then
