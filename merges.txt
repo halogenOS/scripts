@@ -19,6 +19,7 @@ hardware/libhardware_legacy
 hardware/qcom/audio
 hardware/ril
 manifest
+packages/apps/Bluetooth
 packages/apps/Camera2
 packages/apps/DeskClock
 packages/apps/Gallery2
