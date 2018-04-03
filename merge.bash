@@ -1,7 +1,7 @@
 # Variables
 SOURCE=$(pwd)
 SCRIPT_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
-TAG=android-8.1.0_r18
+TAG=""
 XOS_VER=XOS-8.1
 PREFIX=https://android.googlesource.com/platform/
 GERRIT_URL="ssh://%s@review.halogenos.org:29418/android_%s"
@@ -23,6 +23,8 @@ while getopts “opu:t:” OPTION; do
         ;;
   esac
 done
+
+echo -e "\033[01;31m Merging tag \033[01;33m ${TAG:?} \033[0m"
 
 for PROJECT in $(cat ${SCRIPT_DIR}/merges.txt); do
   PATH="${PROJECT}"
