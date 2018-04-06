@@ -27,15 +27,15 @@ done
 echo -e "\033[01;31m Merging tag \033[01;33m ${TAG:?} \033[0m"
 
 for PROJECT in $(cat ${SCRIPT_DIR}/merges.txt); do
-  PATH="${PROJECT}"
+  DIR="${PROJECT}"
   REPO="${PROJECT}"
   IFS=':' read -r -a array <<< "${PROJECT}"
   if [ ${#array[@]} -ge 2 ]; then
-    PATH=${array[0]}
+    DIR=${array[0]}
     REPO=${array[1]}
   fi
-  if [ -d ${PATH} ]; then
-    cd ${PATH}
+  if [ -d ${DIR} ]; then
+    cd ${DIR}
     if [[ ! ${ONLY_PUSH} ]]; then
       git remote remove aosp 2>/dev/null
       git remote add aosp ${PREFIX}${REPO}
@@ -45,7 +45,7 @@ for PROJECT in $(cat ${SCRIPT_DIR}/merges.txt); do
     fi
     if [[ ${PUSH} && ! -z ${GERRIT_USER} ]]; then
       git remote remove gerrit 2>/dev/null
-      git remote add gerrit $(printf ${GERRIT_URL} "${GERRIT_USER}" $(echo ${PATH} | sed 's/\//_/g'))
+      git remote add gerrit $(printf ${GERRIT_URL} "${GERRIT_USER}" $(echo ${DIR} | sed 's/\//_/g'))
       git push gerrit HEAD:refs/heads/${XOS_VER}
     fi
     cd ${SOURCE}
