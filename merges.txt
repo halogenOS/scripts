@@ -17,6 +17,13 @@ hardware/interfaces
 hardware/libhardware
 hardware/libhardware_legacy
 hardware/qcom/audio
+hardware/qcom/camera
+hardware/qcom/data/ipacfg-mgr
+hardware/qcom/display
+hardware/qcom/gps
+hardware/qcom/media
+hardware/qcom/power
+hardware/qcom/wlan
 hardware/ril
 manifest
 packages/apps/Bluetooth
@@ -29,6 +36,7 @@ packages/apps/Settings
 packages/apps/Stk
 packages/apps/Terminal
 packages/inputmethods/LatinIME
+packages/providers/DownloadProvider
 packages/providers/MediaProvider
 packages/providers/TelephonyProvider
 packages/services/Telephony
