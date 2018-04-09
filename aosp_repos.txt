@@ -1,7 +1,7 @@
 bionic
 bootable/recovery
 build/kati
-build/make:build
+build/make
 build/soong
 external/mksh
 external/selinux

@@ -1,9 +1,11 @@
+#!/bin/bash
 # Variables
+
 SOURCE=$(pwd)
-SCRIPT_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+SCRIPT_PROJECT="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+
 TAG=""
 XOS_VER=XOS-8.1
-PREFIX=https://android.googlesource.com/platform/
 GERRIT_URL="ssh://%s@review.halogenos.org:29418/android_%s"
 
 while getopts “opu:t:” OPTION; do
@@ -26,26 +28,18 @@ done
 
 echo -e "\033[01;31m Merging tag \033[01;33m ${TAG:?} \033[0m"
 
-for PROJECT in $(cat ${SCRIPT_DIR}/aosp_repos.txt); do
-  DIR="${PROJECT}"
-  REPO="${PROJECT}"
-  IFS=':' read -r -a array <<< "${PROJECT}"
-  if [ ${#array[@]} -ge 2 ]; then
-    DIR=${array[0]}
-    REPO=${array[1]}
-  fi
-  if [ -d ${DIR} ]; then
-    cd ${DIR}
+for PROJECT in $(cat ${SCRIPT_PROJECT}/aosp_repos.txt); do
+  if [ -d ${PROJECT} ]; then
+    cd ${PROJECT}
     if [[ ! ${ONLY_PUSH} ]]; then
-      git remote remove aosp 2>/dev/null
-      git remote add aosp ${PREFIX}${REPO}
+      aospremote
       git fetch XOS ${XOS_VER}
       git reset --hard XOS/${XOS_VER}
       git pull aosp ${TAG}
     fi
     if [[ ${PUSH} && ! -z ${GERRIT_USER} ]]; then
       git remote remove gerrit 2>/dev/null
-      git remote add gerrit $(printf ${GERRIT_URL} "${GERRIT_USER}" $(echo ${DIR} | sed 's/\//_/g'))
+      git remote add gerrit $(printf ${GERRIT_URL} "${GERRIT_USER}" $(echo ${PROJECT} | sed 's/\//_/g'))
       git push gerrit HEAD:refs/heads/${XOS_VER}
     fi
     cd ${SOURCE}
