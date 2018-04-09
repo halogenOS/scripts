@@ -1,5 +1,6 @@
 #!/bin/bash
 # Variables
+. build/envsetup.sh
 
 SOURCE=$(pwd)
 SCRIPT_PROJECT="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
