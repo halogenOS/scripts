@@ -26,7 +26,7 @@ done
 
 echo -e "\033[01;31m Merging tag \033[01;33m ${TAG:?} \033[0m"
 
-for PROJECT in $(cat ${SCRIPT_DIR}/merges.txt); do
+for PROJECT in $(cat ${SCRIPT_DIR}/aosp_repos.txt); do
   DIR="${PROJECT}"
   REPO="${PROJECT}"
   IFS=':' read -r -a array <<< "${PROJECT}"
