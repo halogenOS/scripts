@@ -5,10 +5,7 @@ external/ant-wireless/antradio-library
 external/brctl
 external/connectivity
 external/ebtables
-external/exfat
 external/fuse
-external/htop
-external/libncurses
 external/libnetfilter_conntrack
 external/libnfc-nxp
 external/libnfnetlink
