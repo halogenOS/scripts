@@ -1,0 +1,25 @@
+#!/bin/bash
+
+function aospremote() {
+    if [[ ! -d .git ]]; then
+        echo "Not in a git dir"
+        return
+    fi
+    local PFX="https://android.googlesource.com/platform/"
+    local PROJECT=$(echo $(pwd) | sed -e "s#${1:?}/##" -e "s/build\/make/build/")
+    git remote remove aosp 2>/dev/null
+    git remote add aosp $PFX$PROJECT
+    echo 'Remote aosp created'
+}
+
+function cafremote() {
+    if [[ ! -d .git ]]; then
+        echo "Not in a git dir"
+        return
+    fi
+    local PFX="https://source.codeaurora.org/quic/la/platform/"
+    local PROJECT=$(echo $(pwd) | sed -e "s#${1:?}/##" -e "s/build\/make/build/" -e 's/qcom\/opensource/qcom-opensource/' -e 's/-caf.*//')
+    git remote remove caf 2>/dev/null
+    git remote add caf $PFX$PROJECT
+    echo 'Remote caf created'
+}

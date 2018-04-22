@@ -1,10 +1,10 @@
 #!/bin/bash
 # Variables
-. build/envsetup.sh
-
 SOURCE=$(pwd)
 SCRIPT_PROJECT="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+source ${SCRIPT_PROJECT}/common
 
+[[ -d ${SOURCE}/.repo/manifests/ ]] || exit "Run this from the root of your source tree"
 TAG=""
 XOS_VER=XOS-8.1
 GERRIT_URL="ssh://%s@review.halogenos.org:29418/android_%s"
@@ -35,7 +35,7 @@ for PROJECT in $(cat ${SCRIPT_PROJECT}/caf_repos.txt); do
     [[ ${PROJECT} =~ "-caf" ]] && XOS_UPSTREAM_VER="${XOS_VER}-caf"
     cd ${PROJECT}
     if [[ ! ${ONLY_PUSH} ]]; then
-      cafremote
+      cafremote ${SOURCE}
       git fetch XOS ${XOS_VER}
       git reset --hard XOS/${XOS_VER}
       git pull caf ${TAG}
