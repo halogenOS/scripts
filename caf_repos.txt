@@ -15,6 +15,5 @@ hardware/qcom/wlan-caf
 hardware/ril-caf
 system/qcom
 vendor/codeaurora/telephony
-vendor/qcom/opensource/cryptfs_hw
 vendor/qcom/opensource/dataservices
 vendor/qcom/opensource/interfaces
