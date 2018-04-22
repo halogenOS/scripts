@@ -38,7 +38,8 @@ for PROJECT in $(cat ${SCRIPT_PROJECT}/caf_repos.txt); do
       cafremote ${SOURCE}
       git fetch XOS ${XOS_VER}
       git reset --hard XOS/${XOS_VER}
-      git pull caf ${TAG}
+      git fetch caf --tags
+      git merge ${TAG}
     fi
     if [[ ${PUSH} && ! -z ${GERRIT_USER} ]]; then
       git remote remove gerrit 2>/dev/null
