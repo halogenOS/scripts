@@ -37,7 +37,7 @@ for PROJECT in $(cat ${SCRIPT_PROJECT}/caf_repos.txt); do
     if [[ ! ${ONLY_PUSH} ]]; then
       cafremote ${SOURCE}
       git fetch XOS ${XOS_VER}
-      git reset --hard XOS/${XOS_VER}
+      git reset --hard XOS/${XOS_UPSTREAM_VER}
       git pull caf ${TAG}
     fi
     if [[ ${PUSH} && ! -z ${GERRIT_USER} ]]; then
