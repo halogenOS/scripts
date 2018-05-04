@@ -25,6 +25,18 @@ while getopts “opu:t:” OPTION; do
       t)
         TAG=${OPTARG}
         ;;
+      *)
+        echo "Unknown argument ${OPTION}"
+      h)
+        echo "Usage: ./aosp_merge.bash [-o] [-p] -u user -t tag"
+        echo
+        echo "Options:"
+        echo "  -o        Push ONLY"
+        echo "  -p        Push"
+        echo "  -u user   Gerrit user"
+        echo "  -t tag    Tag to merge"
+        echo
+        ;;
   esac
 done
 
