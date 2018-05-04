@@ -10,7 +10,18 @@ TAG=""
 XOS_VER=XOS-8.1
 GERRIT_URL="ssh://%s@review.halogenos.org:29418/android_%s"
 
-while getopts “opu:t:” OPTION; do
+if [ "$1" == "-h" ]; then
+  echo "Usage: ./aosp_merge.bash [-o] [-p] -u user -t tag"
+  echo
+  echo "Options:"
+  echo "  -o        Push ONLY"
+  echo "  -p        Push"
+  echo "  -u user   Gerrit user"
+  echo "  -t tag    Tag to merge"
+  echo
+fi
+
+while getopts “opu:th:” OPTION; do
   case ${OPTION} in
       o)
         PUSH=true
@@ -29,16 +40,6 @@ while getopts “opu:t:” OPTION; do
         echo "Unknown argument ${OPTION}"
         echo
         echo "Use option -h for help"
-        ;;
-      h)
-        echo "Usage: ./aosp_merge.bash [-o] [-p] -u user -t tag"
-        echo
-        echo "Options:"
-        echo "  -o        Push ONLY"
-        echo "  -p        Push"
-        echo "  -u user   Gerrit user"
-        echo "  -t tag    Tag to merge"
-        echo
         ;;
   esac
 done
