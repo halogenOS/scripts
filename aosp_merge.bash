@@ -19,6 +19,7 @@ if [ "$1" == "-h" ]; then
   echo "  -u user   Gerrit user"
   echo "  -t tag    Tag to merge"
   echo
+  exit 0
 fi
 
 while getopts “opu:th:” OPTION; do
