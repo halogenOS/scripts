@@ -27,6 +27,9 @@ while getopts “opu:t:” OPTION; do
         ;;
       *)
         echo "Unknown argument ${OPTION}"
+        echo
+        echo "Use option -h for help"
+        ;;
       h)
         echo "Usage: ./aosp_merge.bash [-o] [-p] -u user -t tag"
         echo
