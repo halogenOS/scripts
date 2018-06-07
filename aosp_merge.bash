@@ -41,6 +41,7 @@ while getopts “opu:th:” OPTION; do
         echo "Unknown argument ${OPTION}"
         echo
         echo "Use option -h for help"
+        exit 1
         ;;
   esac
 done
