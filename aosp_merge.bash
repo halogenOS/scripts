@@ -22,7 +22,7 @@ if [ "$1" == "-h" ]; then
   exit 0
 fi
 
-while getopts “opu:th:” OPTION; do
+while getopts “opu:t:h” OPTION; do
   case ${OPTION} in
       o)
         PUSH=true
