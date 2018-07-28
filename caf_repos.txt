@@ -13,6 +13,7 @@ hardware/qcom/bt-caf
 hardware/qcom/wlan-caf
 hardware/ril-caf
 system/qcom
+system/sepolicy
 vendor/codeaurora/telephony
 vendor/qcom/opensource/dataservices
 vendor/qcom/opensource/interfaces
