@@ -35,7 +35,7 @@ for PROJECT in $(cat ${SCRIPT_PROJECT}/caf_repos.txt); do
     [[ ${PROJECT} =~ "-caf" ]] && XOS_UPSTREAM_VER="${XOS_VER}-caf"
     cd ${PROJECT}
     if [[ ! ${ONLY_PUSH} ]]; then
-      addCaf
+      cafremote ${SOURCE}
       git reset --hard m/$XOS_VER
       git pull caf ${TAG}
     fi
